@@ -1,0 +1,45 @@
+<view class="add-page">
+  <view class="header">
+    <text class="title">记录今天</text>
+    <text class="date">{{currentDate}}</text>
+  </view>
+
+  <view class="content-box">
+    <textarea 
+      placeholder="今天发生了什么特别的事吗？" 
+      auto-height 
+      bindinput="onContentChange"
+      value="{{content}}"
+    />
+  </view>
+
+  <view class="mood-box">
+    <text class="subtitle">选择心情</text>
+    <view class="mood-selector">
+      <block wx:for="{{moods}}" wx:key="*this">
+        <view 
+          class="mood-item {{selectedMood === item ? 'active' : ''}}"
+          bindtap="selectMood"
+          data-mood="{{item}}"
+        >
+          <text>{{item}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <button 
+    class="save-btn" 
+    bindtap="saveRecord"
+    disabled="{{!content || !selectedMood}}"
+  >
+    保存记录
+  </button>
+
+  <button 
+  class="history-btn" 
+  bindtap="navigateToHistory"
+>
+  查看历史记录
+</button>
+</view>

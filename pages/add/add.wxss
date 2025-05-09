@@ -1,0 +1,79 @@
+.add-page {
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #FAF5FF;
+  font-family: "Segoe UI", "HarmonyOS Sans", sans-serif;
+}
+
+.header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  color: #6A5ACD;
+  font-weight: bold;
+}
+
+.date {
+  display: block;
+  margin-top: 10px;
+  color: #9370DB;
+}
+
+.content-box, .mood-box {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  font-size: 16px;
+}
+
+.mood-selector {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.mood-item {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  background-color: #E6E6FA;
+  transition: all 0.3s;
+}
+
+.mood-item.active {
+  background-color: #D8BFD8;
+  transform: scale(1.1);
+}
+
+.save-btn {
+  margin-top: 30px;
+  background: linear-gradient(to right, #D8BFD8, #6A5ACD);
+  color: white;
+  border-radius: 25px;
+}
+
+.save-btn[disabled] {
+  opacity: 0.6;
+}
+
+.history-btn {
+  margin-top: 15px;
+  background: white;
+  color: #6A5ACD;
+  border: 1px solid #D8BFD8;
+  border-radius: 25px;
+}

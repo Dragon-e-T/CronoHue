@@ -1,0 +1,66 @@
+.history-page {
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #FAF5FF;
+  font-family: "Segoe UI", "HarmonyOS Sans", sans-serif;
+}
+
+.nav-back {
+  position: absolute;
+  left: 15px;
+  top: 5px;
+  font-size: 20px;
+  color: #6A5ACD;
+}
+
+.header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 24px;
+  color: #6A5ACD;
+  font-weight: bold;
+}
+
+.record-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.record-card {
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.record-date {
+  color: #9370DB;
+  font-size: 14px;
+}
+
+.record-mood {
+  font-size: 20px;
+}
+
+.record-content {
+  color: #4B0082;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.empty-tip {
+  text-align: center;
+  color: #9370DB;
+  margin-top: 50px;
+}

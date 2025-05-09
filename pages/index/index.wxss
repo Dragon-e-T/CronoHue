@@ -1,0 +1,84 @@
+.container {
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #FAF5FF;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.todo-section, .mood-section {
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.done {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.chart-section {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 20px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.chart {
+  width: 100%;
+  height: 250px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.chart-toggle button {
+  margin-left: 10px;
+  background: #E6E6FA;
+  color: #6A5ACD;
+  border: none;
+}
+
+.chart-toggle button.active {
+  background: #D8BFD8;
+}
+
+slider {
+  width: 90%;
+  margin: 10px auto;
+}
+
+.stats-section {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #6A5ACD;
+  font-weight: bold;
+}
+
+/* ... 其他样式规则 ... */

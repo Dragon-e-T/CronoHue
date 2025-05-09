@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="header">
+    <text class="welcome-text">你好，今天过得怎么样？</text>
+
+  </view>
+
+   <view class="todo-section">
+    <view class="input-group">
+      <button bindtap="goToAddPage" type="primary">➕ 添加今日任务</button>
+    </view>
+
+    <view class="todo-list">
+      <block wx:for="{{todos}}" wx:key="id">
+        <view class="todo-item">
+          <checkbox checked="{{item.done}}" bindtap="toggleTodo" data-id="{{item.id}}"/>
+          <text class="{{item.done ? 'done' : ''}}">{{item.text}}</text>
+          <button bindtap="removeTodo" data-id="{{item.id}}" size="mini">×</button>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="chart-section">
+  <view class="chart-header">
+    <text>心情趋势</text>
+    <view class="chart-toggle">
+      <button bindtap="switchChartType" data-type="line" size="mini">折线图</button>
+      <button bindtap="switchChartType" data-type="bar" size="mini">柱状图</button>
+    </view>
+  </view>
+  <canvas canvas-id="moodChart" class="chart"></canvas>
+  <slider 
+    min="0" 
+    max="{{maxScrollValue}}" 
+    value="{{scrollValue}}"
+    bindchange="onScrollChange"
+    activeColor="#6A5ACD"
+    block-size="20"
+    show-value
+  />
+</view>
+
+<view class="stats-section">
+  <text>本周平均心情: {{averageMood}}</text>
+</view>
+
+  <view class="footer">
+    <text>🌸 每一天都值得被温柔以待</text>
+  </view>
+</view>

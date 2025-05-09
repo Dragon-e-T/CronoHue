@@ -1,0 +1,24 @@
+<view class="history-page">
+  <view class="header">
+   <view class="nav-back" bindtap="navigateBack">
+      <text>←</text>
+    </view>
+    <text class="title">我的记录</text>
+  </view>
+
+  <view class="record-list">
+    <block wx:for="{{records}}" wx:key="timestamp">
+      <view class="record-card" style="border-left: 5px solid {{getMoodColor(item.mood)}}">
+        <view class="card-header">
+          <text class="record-date">{{item.date}}</text>
+          <text class="record-mood">{{item.mood}}</text>
+        </view>
+        <text class="record-content">{{item.content}}</text>
+      </view>
+    </block>
+    
+    <view wx:if="{{records.length === 0}}" class="empty-tip">
+      <text>暂无记录，快去添加第一条吧~</text>
+    </view>
+  </view>
+</view>
