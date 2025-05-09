@@ -77,6 +77,13 @@ Page({
     this.initChart();
   },
 
+  formatDate(dateObj) {
+  const year = dateObj.getFullYear();
+  const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+  const day = dateObj.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+  },
+
   updateDate() {
     const now = new Date();
     this.setData({
@@ -109,14 +116,14 @@ Page({
     });
   },
 
-  saveMood() {
+saveMood() {
     if (!this.data.selectedMood) return;
     
     const moodRecord = {
-      date: new Date().toISOString().split('T')[0],
-      mood: this.data.selectedMood,
-      note: this.data.moodNote,
-      timestamp: Date.now()
+        date: new Date().toISOString().split('T')[0],
+        mood: this.data.selectedMood,
+        note: this.data.moodNote,
+        timestamp: Date.now()
     };
     
     const records = wx.getStorageSync('records') || [];
@@ -124,17 +131,18 @@ Page({
     wx.setStorageSync('records', records);
     
     wx.showToast({
-      title: '心情已保存',
-      icon: 'success',
-      complete: () => {
-        // 保存成功后刷新图表
-        this.initChart();
-      }
+        title: '心情已保存',
+        icon: 'success',
+        complete: () => {
+            // 保存成功后刷新所有数据和图表
+            this.loadAllRecords();
+            this.drawChart();
+        }
     });
     
     this.setData({ 
-      selectedMood: null,
-      moodNote: '' 
+        selectedMood: null,
+        moodNote: '' 
     });
 },
 
