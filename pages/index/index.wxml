@@ -21,28 +21,73 @@
   </view>
 
   <view class="chart-section">
-  <view class="chart-header">
-    <text>心情趋势</text>
-    <view class="chart-toggle">
-      <button bindtap="switchChartType" data-type="line" size="mini">折线图</button>
-      <button bindtap="switchChartType" data-type="bar" size="mini">柱状图</button>
+    <view class="chart-header">
+      <view class="chart-toggle">
+        <button 
+          class="{{chartType === 'line' ? 'active' : ''}}"
+          bindtap="switchChartType" 
+          data-type="line"
+        >折线图</button>
+        <button 
+          class="{{chartType === 'bar' ? 'active' : ''}}"
+          bindtap="switchChartType" 
+          data-type="bar"
+        >柱状图</button>
+      </view>
+    </view>
+    
+    <view class="chart-container">
+      <canvas 
+        canvas-id="moodChart" 
+        class="chart"
+        bindtouchstart="handleTouchStart"
+        bindtouchend="handleTouchEnd"
+        disable-scroll="true"
+      />
+      
+      <view 
+        wx:if="{{hoverInfo}}" 
+        class="tooltip" 
+        style="top: {{hoverPosition.top}}px; left: {{hoverPosition.left}}px"
+      >
+        <view class="tooltip-content">
+          <text class="tooltip-date">{{hoverInfo.date}}</text>
+          <text class="tooltip-time">{{hoverInfo.time}}</text>
+          <view class="tooltip-mood">
+            <text>心情评分: {{hoverInfo.score}}</text>
+            <text class="tooltip-emoji">{{hoverInfo.emoji}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="history-navigation">
+      <view class="nav-button" bindtap="showPreviousDay">
+        <text class="nav-icon">◀</text>
+        <text>前一天</text>
+      </view>
+      <view class="today-button" bindtap="showToday">
+        <text>今天</text>
+      </view>
+      <view class="nav-button" bindtap="showNextDay">
+        <text>后一天</text>
+        <text class="nav-icon">▶</text>
+      </view>
     </view>
   </view>
-  <canvas canvas-id="moodChart" class="chart"></canvas>
-  <slider 
-    min="0" 
-    max="{{maxScrollValue}}" 
-    value="{{scrollValue}}"
-    bindchange="onScrollChange"
-    activeColor="#6A5ACD"
-    block-size="20"
-    show-value
-  />
-</view>
 
-<view class="stats-section">
-  <text>本周平均心情: {{averageMood}}</text>
-</view>
+  <view class="stats-section">
+    <text>当日平均心情: {{averageMood}}</text>
+    <picker
+      mode="date"
+      value="{{selectedDate}}"
+      start="2020-01-01"
+      end="2030-12-31"
+      bindchange="onDateChange"
+    >
+      <text class="stats-date clickable">{{selectedDate || '今天'}}</text>
+    </picker>
+  </view>
 
   <view class="footer">
     <text>🌸 每一天都值得被温柔以待</text>

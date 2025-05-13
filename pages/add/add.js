@@ -27,39 +27,62 @@ Page({
       this.setData({ selectedMood: e.currentTarget.dataset.mood });
     },
   
-saveRecord() {
-    const record = {
-        date: this.data.currentDate,
-        content: this.data.content,
-        mood: this.data.selectedMood,
-        timestamp: Date.now()
-    };
+    saveRecord() {
+      if (!this.data.selectedMood || !this.data.content) {
+        wx.showToast({
+          title: '请选择心情和填写内容',
+          icon: 'none'
+        });
+        return;
+      }
 
-    const records = wx.getStorageSync('records') || [];
-    records.unshift(record);
-    
-    wx.setStorageSync('records', records);
-    wx.showToast({
-        title: '保存成功',
-        icon: 'success',
-        complete: () => {
-            // 获取首页页面实例并刷新数据
-            const pages = getCurrentPages();
-            if (pages.length > 1) {
-                const indexPage = pages[0];
-                if (indexPage.route === 'pages/index/index') {
-                    indexPage.loadAllRecords();
-                    indexPage.drawChart();
-                }
-            }
-        }
-    });
-    
-    this.setData({
-        content: '',
-        selectedMood: null
-    });
-},
+      const timestamp = Date.now();
+      const record = {
+          date: this.data.currentDate,
+          content: this.data.content,
+          mood: this.data.selectedMood,
+          timestamp: timestamp
+      };
+
+      console.log('准备保存记录:', record);
+
+      const records = wx.getStorageSync('records') || [];
+      records.unshift(record);
+      
+      try {
+          wx.setStorageSync('records', records);
+          console.log('记录保存成功');
+          
+          wx.showToast({
+              title: '保存成功',
+              icon: 'success',
+              complete: () => {
+                  // 获取首页页面实例并刷新数据
+                  const pages = getCurrentPages();
+                  const indexPage = pages[0];
+                  if (indexPage && indexPage.route === 'pages/index/index') {
+                      console.log('刷新首页数据');
+                      indexPage.processChartData(records);
+                  }
+                  
+                  // 返回首页
+                  wx.navigateBack();
+              }
+          });
+          
+          this.setData({
+              content: '',
+              selectedMood: null
+          });
+      } catch (error) {
+          console.error('保存记录失败:', error);
+          wx.showToast({
+              title: '保存失败，请重试',
+              icon: 'none'
+          });
+      }
+    },
+  
     navigateToHistory() {
         wx.navigateTo({
           url: '/pages/history/history'

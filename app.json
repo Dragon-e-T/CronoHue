@@ -1,15 +1,15 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
     "pages/add/add",
+    "pages/logs/logs",
     "pages/history/history"
-    
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
-    "navigationBarBackgroundColor": "#ffffff"
+    "navigationBarTitleText": "心情记录",
+    "navigationBarBackgroundColor": "#FAF5FF",
+    "backgroundColor": "#FAF5FF"
   },
   "style": "v2",
   "componentFramework": "glass-easel",

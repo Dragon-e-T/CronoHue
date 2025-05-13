@@ -43,9 +43,16 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
+.chart-container {
+  position: relative;
+  width: 300px;
+  height: 250px;
+  margin: 0 auto;
+}
+
 .chart {
   width: 100%;
-  height: 250px;
+  height: 100%;
 }
 
 .chart-header {
@@ -53,22 +60,121 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  padding: 0 15px;
+}
+
+.chart-toggle {
+  display: flex;
+  gap: 10px;
 }
 
 .chart-toggle button {
-  margin-left: 10px;
   background: #E6E6FA;
   color: #6A5ACD;
   border: none;
+  border-radius: 15px;
+  padding: 4px 12px;
+  font-size: 12px;
+  transition: all 0.3s ease;
 }
 
 .chart-toggle button.active {
   background: #D8BFD8;
+  transform: scale(1.05);
+}
+
+.tooltip {
+  position: fixed;
+  background-color: #E6E6FA;
+  border: 1px solid #D8BFD8;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #4B0082;
+  font-size: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  pointer-events: none;
+  animation: fadeIn 0.2s ease-in-out;
+  z-index: 1000;
+  transform: translate(-50%, -100%);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #E6E6FA;
+}
+
+.tooltip-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.tooltip-date {
+  font-size: 12px;
+  color: #9370DB;
+}
+
+.tooltip-time {
+  font-weight: bold;
+  color: #6A5ACD;
+}
+
+.tooltip-mood {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tooltip-emoji {
+  font-size: 16px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -90%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -100%);
+  }
+}
+
+.slider-container {
+  padding: 0 15px;
+  margin-top: 20px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.slider-container:hover {
+  opacity: 1;
 }
 
 slider {
-  width: 90%;
-  margin: 10px auto;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 自定义滑块样式 */
+slider .wx-slider-handle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(216, 191, 216, 0.5);
+}
+
+slider .wx-slider-track {
+  background-color: rgba(106, 90, 205, 0.3);
 }
 
 .stats-section {
@@ -79,6 +185,75 @@ slider {
   text-align: center;
   color: #6A5ACD;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
-/* ... 其他样式规则 ... */
+.stats-date.clickable {
+  color: #9370DB;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  background-color: #F0F0FF;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.stats-date.clickable:active {
+  background-color: #E6E6FA;
+  transform: scale(0.98);
+}
+
+/* 移除旧的日期选择器相关样式 */
+.date-selector,
+.picker-content,
+.current-date,
+.picker-icon {
+  display: none;
+}
+
+.history-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  padding: 0 15px;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 15px;
+  background: #E6E6FA;
+  border-radius: 15px;
+  color: #6A5ACD;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-button:active {
+  transform: scale(0.95);
+  background: #D8BFD8;
+}
+
+.today-button {
+  padding: 8px 20px;
+  background: #6A5ACD;
+  border-radius: 15px;
+  color: white;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.today-button:active {
+  transform: scale(0.95);
+  background: #5A4ACD;
+}
+
+.nav-icon {
+  font-size: 12px;
+}
